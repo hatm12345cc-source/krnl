@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRX | الموقع الرسمي</title>
+    <style>
+        :root {
+            --bg: #020205;
+            --main-rainbow: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #00e5ff, #ff00ff);
+            --card: rgba(15, 15, 19, 0.9);
+        }
+
+        /* أنيميشن قوس قزح للنصوص والحدود */
+        @keyframes rainbow-text {
+            0% { color: #ff0000; }
+            20% { color: #ff8800; }
+            40% { color: #ffff00; }
+            60% { color: #00ff00; }
+            80% { color: #00e5ff; }
+            100% { color: #ff00ff; }
+        }
+
+        @keyframes rainbow-border {
+            0% { border-color: #ff0000; }
+            20% { border-color: #ff8800; }
+            40% { border-color: #ffff00; }
+            60% { border-color: #00ff00; }
+            80% { border-color: #00e5ff; }
+            100% { border-color: #ff00ff; }
+        }
+
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0; padding: 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* أنيميشن رقص الصور */
+        @keyframes dance {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+        .dancing { animation: dance 3s ease-in-out infinite; }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; background: rgba(0,0,0,0.9);
+            border-bottom: 2px solid; animation: rainbow-border 5s linear infinite;
+            position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(5px);
+        }
+
+        .logo-img { width: 50px; height: 50px; border-radius: 10px; border: 1px solid; animation: rainbow-border 5s linear infinite; }
+        .logo-text { font-size: 24px; font-weight: bold; animation: rainbow-text 5s linear infinite; }
+
+        .container { max-width: 600px; margin: 20px auto; padding: 15px; }
+        .page { display: none; }
+        .active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .main-card {
+            background: var(--card); border-radius: 20px; padding: 20px;
+            margin-bottom: 15px; border: 1px solid #333; cursor: pointer;
+            transition: 0.3s; text-decoration: none; color: white; display: block;
+        }
+        .main-card h3 { margin: 0; animation: rainbow-text 5s linear infinite; }
+
+        .card {
+            background: var(--card); border-radius: 20px; padding: 15px;
+            border: 1px solid #333; margin-bottom: 25px; text-align: right;
+            position: relative;
+        }
+        .card img { width: 100%; border-radius: 15px; margin-bottom: 12px; }
+        
+        /* أيقونة فوق الصورة جهة اليسار */
+        .badge-top-left {
+            position: absolute; top: 25px; left: 25px;
+            width: 40px !important; border-radius: 5px !important; z-index: 5;
+        }
+
+        .btn-install {
+            display: block; padding: 15px; border-radius: 12px;
+            background: linear-gradient(45deg, #8e2de2, #4a00e0);
+            color: white; text-decoration: none; font-weight: bold;
+            margin-top: 10px; text-align: center; font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="https://raw.githubusercontent.com/hatm12345cc-source/krnl/refs/heads/main/32327A28-AEE3-4C73-902C-C6C91EED9868.png" class="logo-img dancing">
+    <div class="logo-text" onclick="showPage('home')">TRX</div>
+    <div style="width:50px"></div> </header>
+
+<div class="container">
+    
+    <div id="home" class="page active">
+        <img src="https://raw.githubusercontent.com/hatm12345cc-source/krnl/refs/heads/main/32327A28-AEE3-4C73-902C-C6C91EED9868.png" class="dancing" style="width:120px; margin-bottom:10px;">
+        <h2 style="animation: rainbow-text 5s linear infinite;">مرحباً بكم في TRX</h2>
+        
+        <div class="main-card" onclick="showPage('ios')"><h3>(هاكات الأيفون 🍎)</h3></div>
+        <div class="main-card" onclick="showPage('android')"><h3>(هاكات الأندرويد 🤖)</h3></div>
+        <div class="main-card" onclick="showPage('pc')"><h3>(هاكات الكمبيوتر 💻)</h3></div>
+    </div>
+
+    <div id="ios" class="page">
+        <h2 style="animation: rainbow-text 5s linear infinite;">(هاكات الأيفون 🍎)</h2>
+        
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/VN7/refs/heads/main/IMG_1938.jpeg" class="badge-top-left">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/VN7/refs/heads/main/IMG_1937.jpeg" class="dancing">
+            <h3>Install VN7</h3>
+            <p>بدون شراء شهايد - أداء ممتاز</p>
+            <a href="itms-services://?action=download-manifest&url=https://delta.bz/manifest.plist" class="btn-install">Install VN7</a>
+        </div>
+
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/VN7/refs/heads/main/IMG_1929.png" class="dancing">
+            <h3>Install Delta</h3>
+            <a href="itms-services://?action=download-manifest&url=https://delta.bz/manifest.plist" class="btn-install">Install Delta</a>
+            <a href="https://nekoo.eu.org/W7dMvm" class="btn-install" style="background: #222;">Install Delta VR7</a>
+        </div>
+
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/VN7/refs/heads/main/IMG_1935.jpeg" class="dancing">
+            <h3>Install SkibX</h3>
+            <a href="itms-services://?action=download-manifest&url=https://skibx.com/ota.plist" class="btn-install">Install SkibX</a>
+        </div>
+    </div>
+
+    <div id="android" class="page">
+        <h2 style="animation: rainbow-text 5s linear infinite;">(هاكات الأندرويد 🤖)</h2>
+        <img src="https://raw.githubusercontent.com/hatm12345cc-source/krnl/refs/heads/main/IMG_1949.jpeg" style="width:100%; border-radius:15px; margin-bottom:20px;">
+
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/VN7xxz/refs/heads/main/IMG_1987.jpeg" class="dancing">
+            <h3>Install JJSploit</h3>
+            <a href="https://www.mediafire.com/file/gqecdw99e5fyntq/JJSploit_64Bits-2.708.880.apk/file" class="btn-install">Install JJSploit</a>
+            <a href="https://www.mediafire.com/file/iuozigbm6coftwy/JJSploit_VNG_64Bits-2.707.735.apk/file" class="btn-install" style="background:#00c6ff;">Install VN</a>
+        </div>
+
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/VN7/refs/heads/main/IMG_1929.png" class="dancing">
+            <h3>Install Delta</h3>
+            <a href="https://www.mediafire.com/file/ti5geyfey7thof9/Delta-2.707.734.apk/file" class="btn-install">Install Delta</a>
+        </div>
+
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/krnl/refs/heads/main/IMG_1954.jpeg" class="dancing">
+            <h3>Install Codex</h3>
+            <a href="https://www.mediafire.com/file/80ue9v9kcdmnzhh/Codex+v2.708.apk/file" class="btn-install">Install Codex</a>
+        </div>
+
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/delta-vn7/refs/heads/main/IMG_1956.jpeg" class="dancing">
+            <h3>Install Arceus X Neo</h3>
+            <a href="https://www.mediafire.com/file/5buplrts6jij7z5/Arceus+X+Neo+v2.0.5.apk/file" class="btn-install">Install Arceus X Neo</a>
+        </div>
+
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/delta-vn7/refs/heads/main/IMG_1960.jpeg" class="dancing">
+            <h3>Install Vega X</h3>
+            <a href="https://www.mediafire.com/file/a1xkbytour4xksc/Vega.X+8.apk/file" class="btn-install">Install Vega X</a>
+        </div>
+
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/delta-vn7/refs/heads/main/IMG_1963.jpeg" class="dancing">
+            <h3>Install Trigon</h3>
+            <a href="https://www.mediafire.com/file/38mfn2dhkiqgk70/Trigon_2.708.880.apk/file" class="btn-install">Install Trigon</a>
+        </div>
+    </div>
+
+    <div id="pc" class="page">
+        <h2 style="animation: rainbow-text 5s linear infinite;">(هاكات الكمبيوتر 💻)</h2>
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/SKINA/refs/heads/main/IMG_1972.jpeg" class="dancing">
+            <h3>Install Pro Hacker</h3>
+            <a href="https://gofile.io/d/6npfj8" class="btn-install">Install Pro Hacker</a>
+        </div>
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/hatm12345cc-source/SKINA/refs/heads/main/IMG_1973.jpeg" class="dancing">
+            <h3>Install Xeno</h3>
+            <a href="https://www.mediafire.com/file/u767iu4khrmwjj3/Xeno-v1.3.20.zip/file" class="btn-install">Install Xeno</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo(0,0);
+    }
+</script>
+
+</body>
+</html>
