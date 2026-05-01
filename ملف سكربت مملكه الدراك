@@ -1,0 +1,93 @@
+-- [[ Devo - Javo Eva Way | FIX V.6 INSTANT ]] --
+local CoreGui = game:GetService("CoreGui")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local isTracking = false
+local lastPos = nil
+local hasTool = false
+
+-- 1. الواجهة البنفسجية (كما هي)
+local ScreenGui = Instance.new("ScreenGui", CoreGui)
+ScreenGui.Name = "DevoPurpleV6"
+local MainFrame = Instance.new("Frame", ScreenGui)
+MainFrame.Size = UDim2.new(0, 150, 0, 150)
+MainFrame.Position = UDim2.new(0.5, -75, 0.5, -75)
+MainFrame.BackgroundColor3 = Color3.fromRGB(148, 0, 211)
+MainFrame.Active = true
+MainFrame.Draggable = true
+Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 20)
+
+local Circle = Instance.new("Frame", MainFrame)
+Circle.Size = UDim2.new(0, 80, 0, 80)
+Circle.Position = UDim2.new(0.5, -40, 0.5, -40)
+Circle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Instance.new("UICorner", Circle).CornerRadius = UDim.new(1, 0)
+
+local Icon = Instance.new("ImageLabel", Circle)
+Icon.Size = UDim2.new(0.8, 0, 0.8, 0)
+Icon.Position = UDim2.new(0.1, 0, 0.1, 0)
+Icon.Image = "rbxassetid://85296460383055"
+Icon.BackgroundTransparency = 1
+
+local TrackBtn = Instance.new("TextButton", MainFrame)
+TrackBtn.Size = UDim2.new(1, 0, 0, 30)
+TrackBtn.Position = UDim2.new(0, 0, 0.8, 0)
+TrackBtn.Text = "هجوم فوري"
+
+-- 2. وظيفة التحقق (فريق + حياة)
+local function isValid(p)
+    if not p.Character or not p.Character:FindFirstChild("Humanoid") then return false end
+    local char = p.Character
+    if char:FindFirstChild("TeamHighlight") or (char:FindFirstChild("Highlight") and char.Highlight.FillColor == Color3.fromRGB(0, 255, 0)) then return false end
+    if char.Humanoid.Health <= 0 then return false end
+    return true
+end
+
+-- 3. الزر والتشغيل
+TrackBtn.MouseButton1Click:Connect(function()
+    isTracking = not isTracking
+    if isTracking then
+        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            lastPos = player.Character.HumanoidRootPart.CFrame
+        end
+        TrackBtn.Text = "جارِ الجلد.."
+    else
+        TrackBtn.Text = "هجوم فوري"
+    end
+end)
+
+-- 4. المحرك (السرعة القصوى)
+RunService.Stepped:Connect(function() -- استخدمنا Stepped لأنه أسرع من Heartbeat في التنقل
+    if isTracking and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        
+        -- تشيك الأداة (فوري)
+        local tool = player.Character:FindFirstChildOfClass("Tool") or player.Backpack:FindFirstChildOfClass("Tool")
+        
+        if tool then
+            hasTool = true
+        elseif hasTool then
+            -- الغرض راح؟ ارجع في نفس الفريم!
+            isTracking = false
+            hasTool = false
+            player.Character.HumanoidRootPart.CFrame = lastPos
+            TrackBtn.Text = "تم الغدر بنجاح!"
+            return
+        end
+
+        -- البحث عن ضحية (مع تجاهل الفريق والميتين)
+        local target = nil
+        local dist = 9999
+        for _, p in pairs(Players:GetPlayers()) do
+            if p ~= player and isValid(p) then
+                local d = (p.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                if d < dist then target = p; dist = d end
+            end
+        end
+
+        if target then
+            player.Character.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame
+        end
+    end
+end)
