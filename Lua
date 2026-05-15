@@ -1,5 +1,5 @@
 loadstring(game:HttpGet(("https://pastefy.app/0Um8G8LP/raw")))()
-game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "-ســـكربت المــــطور اســــــــماعـــــيل-")
+game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "-ســـكربت المــــطور مملكه الدراك -")
  
 local args = {
     [1] = "PickingRPNameColor",
@@ -10,8 +10,8 @@ game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eCo
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/speedwave1/speed_wave/refs/heads/main/Gui")))()
 MakeWindow({
   Hub = {
-    Title = "ismailhub  BROKHAVEN RB",
-    Animation = "ismail hub by khalifa"
+    Title = "سكربت مملكه الدراك",
+    Animation = "سكربت مملكه الدراك"
   },
   Key = {
     KeySystem = false,
@@ -28,7 +28,7 @@ MakeWindow({
   }
   })
 MinimizeButton({
-  Image = "rbxassetid://79421600486796",
+  Image = "rbxassetid://129800639484587
   Size = {50, 50},
   Color = Color3.fromRGB(1, 2, 3),
   Corner = true,
@@ -41,12 +41,12 @@ local Main = MakeTab({
 })
 local Image = AddImageLabel(Main, {
   Name = "قناة السكربت",
-  Image = "rbxassetid://79421600486796"
+  Image = "rbxassetid://129800639484587"
 })
 AddButton(Main, {
   Name = "انسخ حسابي تــــيك",
   Callback = function()
-    setclipboard('@.ismail0053')
+    setclipboard(" مملكه الدراك "
   end
 })
 local Players = game:GetService("Players")
