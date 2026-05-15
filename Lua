@@ -1599,3 +1599,191 @@ game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServ
 
 end
 })
+
+SkyBoxTab = Window:MakeTab({ Title = "[SkyBox]فلاش ماب", Icon = "rbxassetid://13364900349" })
+
+local TshirtIDs = {
+    ["الافتراضي"] = nil,
+    ["colkid"] = 98679358331654,
+    ["T-Shirt 3"] = 100000000000003,
+    ["T-Shirt 4"] = 100000000000004,
+    ["T-Shirt 5"] = 100000000000005,
+    ["T-Shirt 6"] = 100000000000006,
+    ["T-Shirt 7"] = 100000000000007,
+    ["T-Shirt 8"] = 100000000000008,
+    ["T-Shirt 9"] = 100000000000009,
+    ["T-Shirt 10"] = 100000000000010
+}
+
+local SelectedTshirtID = nil
+
+local function notify(title, text)
+    StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Duration = 4
+    })
+end
+
+SkyBoxTab:AddDropdown({
+    Name = "اختر التيشرت",
+    Description = "Skybox FE",
+    Options = {
+        "الافتراضي","colkid","T-Shirt 3","T-Shirt 4","T-Shirt 5",
+        "T-Shirt 6","T-Shirt 7","T-Shirt 8","T-Shirt 9","T-Shirt 10"
+    },
+    Default = "الافتراضي",
+    Callback = function(option)
+        SelectedTshirtID = TshirtIDs[option]
+        notify("T-Shirt", "تم اختيار: "..option)
+    end
+})
+
+ SkyboxActive = false
+ CurrentTrack = nil
+ RigidTrack = nil
+
+SkyBoxTab:AddButton({
+   Name = "اختراق السماء يظهر🥶",
+   Callback = function()
+
+        if SkyboxActive then
+            if CurrentTrack then
+                CurrentTrack:Stop(0.1)
+                CurrentTrack = nil
+            end
+            if RigidTrack then
+                RigidTrack:Stop(0.1)
+                RigidTrack = nil
+            end
+
+            ReplicatedStorage.Remotes.ResetCharacterAppearance:FireServer()
+            task.wait(0.3)
+
+             char = LocalPlayer.Character
+            if char then
+                 hum = char:FindFirstChildOfClass("Humanoid")
+                if hum then hum.Health = 100 end
+            end
+
+            SkyboxActive = false
+            print("")
+            return
+        end
+
+         WearShirt = ReplicatedStorage.Remotes:FindFirstChild("WearShirt")
+        if SelectedTshirtID and WearShirt then
+            pcall(function()
+                WearShirt:InvokeServer(SelectedTshirtID)
+            end)
+        end
+        ReplicatedStorage.Remotes.ChangeCharacterBody:InvokeServer({100839513065432})
+
+         player = LocalPlayer
+         character = player.Character or player.CharacterAdded:Wait()
+         humanoid = character:WaitForChild("Humanoid")
+
+        local Settings = {
+            ["Fade In"] = 0.1,
+            ["Fade Out"] = 0.1,
+            ["Weight"] = 1,
+            ["Speed"] = 1,
+            ["Time Position"] = 0
+        }
+
+         function LoadTrack(id)
+             anim = Instance.new("Animation")
+            anim.AnimationId = "rbxassetid://"..id
+             track = humanoid:LoadAnimation(anim)
+            track.Priority = Enum.AnimationPriority.Action4
+            track:Play(Settings["Fade In"], Settings["Weight"], Settings["Speed"])
+            CurrentTrack = track
+            return track
+        end
+
+        LoadTrack(70883871260184)
+        task.wait(0.5)
+
+         plank = Instance.new("Animation")
+        plank.AnimationId = "rbxassetid://3695333486"
+        RigidTrack = humanoid:LoadAnimation(plank)
+        RigidTrack.Priority = Enum.AnimationPriority.Movement
+        RigidTrack:Play(0.1,1,0)
+
+        SkyboxActive = true
+        print("Skybox")
+   end
+})
+
+SkyBoxTab:AddButton({
+    Name = "🌃الغاء اختراق السماء",
+    Callback = function()
+        if CurrentTrack then
+            CurrentTrack:Stop(0.1)
+            CurrentTrack = nil
+        end
+        if RigidTrack then
+            RigidTrack:Stop(0.1)
+            RigidTrack = nil
+        end
+
+        SkyboxActive = false
+        ReplicatedStorage.Remotes.ResetCharacterAppearance:FireServer()
+        task.wait(0.3)
+
+         char = LocalPlayer.Character
+        if char then
+             hum = char:FindFirstChildOfClass("Humanoid")
+            if hum then hum.Health = 100 end
+        end
+
+        print("")
+    end
+})
+
+local SpinSpeed = 1
+local SpinEnabled = false
+local SpinConnection = nil
+
+SkyBoxTab:AddSlider({
+    Name = "اختار سرعة دوران",
+    Min = 1,
+    Max = 100,
+    Default = 1,
+    Increment = 1,
+    ValueName = "Speed",
+    Callback = function(Value)
+        SpinSpeed = Value
+    end
+})
+
+SkyBoxTab:AddToggle({
+    Name = "تشغيل الدوران",
+    Default = false,
+    Callback = function(Value)
+        SpinEnabled = Value
+
+        if SpinEnabled then
+            if SpinConnection then SpinConnection:Disconnect() end
+
+            SpinConnection = RunService.Heartbeat:Connect(function(dt)
+                local char = LocalPlayer.Character
+                if not char then return end
+
+                local root = char:FindFirstChild("HumanoidRootPart")
+                if not root then return end
+
+                local radiansPerSecond = SpinSpeed * math.pi
+                local rotation = radiansPerSecond * dt
+
+                root.CFrame = root.CFrame * CFrame.Angles(0, rotation, 0)
+            end)
+        else
+            if SpinConnection then
+                SpinConnection:Disconnect()
+                SpinConnection = nil
+            end
+        end
+    end
+})
+
