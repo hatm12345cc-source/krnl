@@ -1,5 +1,5 @@
 loadstring(game:HttpGet(("https://pastefy.app/0Um8G8LP/raw")))()
-game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "-ســـكربت المــــطور اســــــــماعـــــيل-")
+game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "-ســـكربت المــــطور الــــــدراك-")
  
 local args = {
     [1] = "PickingRPNameColor",
